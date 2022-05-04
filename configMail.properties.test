@@ -1,0 +1,4 @@
+smtpadd=smtp address
+smtpprt=smtp port number
+fromadd=user email address
+passwd=user email password
