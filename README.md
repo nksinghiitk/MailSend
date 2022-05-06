@@ -12,16 +12,14 @@
  [//  - headerm=Email,Midsem,Endsem]::
   [// - filename=markslist.txt]::
   [// - instructormail=singhnk@iitk.ac.in]::
-  
-4. Add yours marks list file to folder and change the name in courseconfig.properties file.
-5. Finally run the command sh sm.sh
-6. It ask for four input thats provide freedom to create text file with different  category. The out put looks like this
+    [//  Add yours marks list file to folder and change the name in courseconfig.properties file.]::
+    
+4. Finally run the command sh sm.sh
+5. It ask for four input thats provide freedom to different or your choice values. The out put looks like this
 
 $ sh sm.sh
-******************************************
-*                                                        *
-*  Welcome to Mail Send Program   *
-*                                                        *
+******************************************                                                      
+*  Welcome to Mail Send Program   *                                                       
 ******************************************
 # Please provide the some parameters:
 ## Enter the instructor email
