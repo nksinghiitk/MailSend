@@ -1,6 +1,6 @@
 
 import java.io.*;
-
+import java.util.Scanner;
 import java.util.Properties;
 import javax.mail.Message;
 import javax.mail.MessagingException;
@@ -19,6 +19,7 @@ import javax.mail.internet.MimeMessage;
 
 public class SendMarksMail{
 
+   static String subj="", filenme="", frmu="", head="",pmess="";
 
  /**
    * This method is used to load properties file for reading.
@@ -45,6 +46,7 @@ public class SendMarksMail{
    	}
    	return prop;
    }
+
  /**
    * This method is used to send mail.
    * @param line  This contains the email and marks
@@ -119,7 +121,7 @@ public class SendMarksMail{
             	message.setSubject(subj);
 
             	// Now set the actual string message
-       	    	message.setContent("Your marks are given below : <br><br>"+headbody+"<tr>"+ messbody+"</tr></table>","text/html");
+       	    	message.setContent("Dear "+to+"<br><br>"+pmess+"<br><br>Your marks are given below : <br><br>"+headbody+"<tr>"+ messbody+"</tr></table>","text/html");
 
             	// Send message
             	Transport.send(message);
@@ -143,12 +145,50 @@ public class SendMarksMail{
    */
    public static void main(String[] args){
 	try{
-		Properties cprop = readPropertiesFile("courseconfig.properties");
-		String subj = cprop.getProperty("subject");
-	        String head = cprop.getProperty("headerm");
-	        String filenme = cprop.getProperty("filename");
-	        String frmu = cprop.getProperty("instructormail");
 
+		System.out.println("***********************************");
+		System.out.println("*                                 *");
+		System.out.println("*                                 *");
+		System.out.println("*                                 *");
+		System.out.println("*  Welcome to Mail Send Program   *");
+		System.out.println("*                                 *");
+		System.out.println("*                                 *");
+		System.out.println("*                                 *");
+		System.out.println("***********************************");
+		System.out.println("Please provide the some parameters:");
+		Scanner in = new Scanner(System.in);
+		System.out.println("Enter the instructor email");
+		String insemail = in.nextLine();
+		System.out.println("Enter the subject of email");
+		String esubj = in.nextLine();
+		System.out.println("Enter the marks file name");
+		String mflenme = in.nextLine();
+		System.out.println("Enter the Message which you want to give to the student");
+		String premessage = in.nextLine();
+
+		if((insemail.isEmpty())||(esubj.isEmpty())||(mflenme.isEmpty())){
+			System.out.println("Please enter all the values");
+			System.exit(0);
+		}else{
+			subj =esubj;
+			filenme=mflenme;
+			frmu=insemail;
+			pmess=premessage;
+
+			// write these values in properties
+			PropertiesCache cache = PropertiesCache.getInstance();
+			cache.setProperty("subject", subj);
+			cache.setProperty("filename", filenme);
+			cache.setProperty("instructormail", frmu);
+			cache.setProperty("pmailmess", premessage);
+			try{
+				cache.flush();
+			}
+			catch(Exception ex){
+				System.out.println("The error is "+ex.toString());
+			}
+		
+		}
 		File fileName=new File(filenme);
 		// Creating an object of BufferedReader class
 		BufferedReader br=null;
@@ -159,10 +199,15 @@ public class SendMarksMail{
         	// Condition holds true till
         	// there is character in a string
         	while ((st = br.readLine()) != null){
+			if(count == 0){
+				head=st;
+			}else{
+				SendMail(st,subj,head,frmu);
+			}
 			count++;
-			SendMail(st,subj,head,frmu);
     		}
-		System.out.println(count+" mail sent. ");
+		System.out.println(count-1+" mail sent. ");
+		
 	}
 	catch(FileNotFoundException fnfe) {
                        fnfe.printStackTrace();
