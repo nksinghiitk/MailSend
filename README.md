@@ -20,19 +20,15 @@
 $ sh sm.sh
 ******************************************
 *                                                        *
-*                                                        *
-*                                                        *
 *  Welcome to Mail Send Program   *
 *                                                        *
-*                                                        *
-*                                                        *
 ******************************************
-## Please provide the some parameters:
-# Enter the instructor email
+# Please provide the some parameters:
+## Enter the instructor email
 nksinghiitk@gmail.com
-# Enter the subject of email
+## Enter the subject of email
 This is Blab Grade card
-# Enter the marks file name
+## Enter the marks file name
 markslist.txt
-# Enter the Message which you want to give to the student
+## Enter the Message which you want to give to the student
 Do hard work.
