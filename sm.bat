@@ -1,0 +1,1 @@
+C:\Users\yns\Downloads\openjdk-19.0.1_windows-x64_bin\jdk-19.0.1\bin\java -classpath .;activation-1.0.2.jar;mail.jar SendMarksMail
